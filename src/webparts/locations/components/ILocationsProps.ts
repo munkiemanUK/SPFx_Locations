@@ -4,4 +4,6 @@ export interface ILocationsProps {
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
+  context: any;
+  webURL: string;
 }
