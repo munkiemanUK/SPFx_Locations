@@ -10,6 +10,7 @@ const termID = 'e8e6feb5-1cf7-47bd-afb7-e352b78bd365'; // division terms
 
 const Locations : React.FunctionComponent<ILocationsProps> = (props) => {
   const [terms,setTerms] = useState([]);
+  const [selectedTerm, setSelectedTerm] = useState('');
 
   useEffect(() => {
     const fetchTerms=async() => {
@@ -26,15 +27,22 @@ const Locations : React.FunctionComponent<ILocationsProps> = (props) => {
 
   },[props.context,setID,termID]);
 
+  const handleTermChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedTerm(event.target.value);
+  };
+
+/*
   const renderTerms = (items:any) => {
     console.log("terms",items);
+    return (
+      <ul className={styles.links}>  
+        {items.map((term: any) => (
+          <li key={term.id}>{term.labels[0].name}</li>
+        ))}
+      </ul>
+    )
   }
-
-  useEffect(() => {
-    if(terms.length > 0) {
-      renderTerms(terms);
-    }
-  }, [terms]);
+*/
 
   const {
     description,
@@ -59,6 +67,24 @@ const Locations : React.FunctionComponent<ILocationsProps> = (props) => {
       </p>
       <div>
         <h2>Term Store Terms</h2>
+{terms.length > 0 ? (
+            <div>
+              <select onChange={handleTermChange} value={selectedTerm}>
+                <option value="">Select a term</option>
+                {terms.map((term: any) => (
+                  <option key={term.id} value={term.id}>{term.labels[0].name}</option>
+                ))}
+              </select>
+              {selectedTerm && (
+                <div>
+                  <h3>Selected Term Details</h3>
+                  {/*<p>{terms.find(term => term.id === selectedTerm)?.labels[0].name}</p>*/}
+                </div>
+              )}
+            </div>
+          ) : (
+            <p>Loading terms...</p>
+          )}
       </div>
     </div>
   </section>
@@ -69,10 +95,5 @@ const Locations : React.FunctionComponent<ILocationsProps> = (props) => {
 export default Locations;
 
 /*
-        <ul className={styles.links}>
-          
-          {terms.map(term => (
-            <li key={term.id}>{term}</li>
-          ))}
-        </ul>
+
 */
