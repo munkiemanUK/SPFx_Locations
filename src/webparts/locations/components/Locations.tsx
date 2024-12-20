@@ -67,7 +67,7 @@ const Locations : React.FunctionComponent<ILocationsProps> = (props) => {
       </p>
       <div>
         <h2>Term Store Terms</h2>
-{terms.length > 0 ? (
+          {terms.length > 0 ? (
             <div>
               <select onChange={handleTermChange} value={selectedTerm}>
                 <option value="">Select a term</option>
@@ -93,7 +93,3 @@ const Locations : React.FunctionComponent<ILocationsProps> = (props) => {
 }
 
 export default Locations;
-
-/*
-
-*/
